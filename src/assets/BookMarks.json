@@ -1,0 +1,62 @@
+[
+    {
+        "title": "bilibili",
+        "url": "https://www.bilibili.com/",
+        "img": "./book_mark_img/bilibili.png"
+    },
+    {
+        "title": "微博",
+        "url": "https://www.weibo.com/",
+        "img": "./book_mark_img/weibo.png"
+    },
+    {
+        "title": "Github",
+        "url": "https://www.Github.com/",
+        "img": "./book_mark_img/github.png"
+    },
+    {
+        "title": "淘宝",
+        "url": "https://www.taobao.com/",
+        "img": "./book_mark_img/taobao.png"
+    },
+    {
+        "title": "csdn",
+        "url": "https://www.csdn.net/",
+        "img": "./book_mark_img/csdn.png"
+    },
+    {
+        "title": "抖音",
+        "url": "https://www.douyin.com/",
+        "img": "./book_mark_img/douyin.png"
+    },
+    {
+        "title": "youtube",
+        "url": "https://www.youtube.com/",
+        "img": "./book_mark_img/youtube.png"
+    },
+    {
+        "title": "西瓜视频",
+        "url": "https://www.ixigua.com/",
+        "img": "./book_mark_img/ixigua.png"
+    },
+    {
+        "title": "知乎",
+        "url": "https://www.zhihu.com/",
+        "img": "./book_mark_img/zhihu.png"
+    },
+    {
+        "title": "Figma",
+        "url": "https://www.figma.com/",
+        "img": "./book_mark_img/figma.png"
+    },
+    {
+        "title": "twitter",
+        "url": "https://www.twitter.com/",
+        "img": "./book_mark_img/twitter.png"
+    },
+    {
+        "title": "instagram",
+        "url": "http://www.instagram.com/",
+        "img": "./book_mark_img/instagram.png"
+    }
+]

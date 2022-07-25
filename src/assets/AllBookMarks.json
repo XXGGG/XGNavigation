@@ -1,0 +1,373 @@
+[
+    {
+        "key":"recommend",
+        "list":[
+            {
+                "title": "bilibili",
+                "url": "https://www.bilibili.com/",
+                "img": "./book_mark_img/bilibili.png"
+            },
+            {
+                "title": "微博",
+                "url": "https://www.weibo.com/",
+                "img": "./book_mark_img/weibo.png"
+            },
+            {
+                "title": "Github",
+                "url": "https://www.Github.com/",
+                "img": "./book_mark_img/github.png"
+            },
+            {
+                "title": "淘宝",
+                "url": "https://www.taobao.com/",
+                "img": "./book_mark_img/taobao.png"
+            },
+            {
+                "title": "csdn",
+                "url": "https://www.csdn.net/",
+                "img": "./book_mark_img/csdn.png"
+            },
+            {
+                "title": "抖音",
+                "url": "https://www.douyin.com/",
+                "img": "./book_mark_img/douyin.png"
+            },
+            {
+                "title": "youtube",
+                "url": "https://www.youtube.com/",
+                "img": "./book_mark_img/youtube.png"
+            },
+            {
+                "title": "西瓜视频",
+                "url": "https://www.ixigua.com/",
+                "img": "./book_mark_img/ixigua.png"
+            },
+            {
+                "title": "知乎",
+                "url": "https://www.zhihu.com/",
+                "img": "./book_mark_img/zhihu.png"
+            },
+            {
+                "title": "Figma",
+                "url": "https://www.figma.com/",
+                "img": "./book_mark_img/figma.png"
+            },
+            {
+                "title": "twitter",
+                "url": "https://www.twitter.com/",
+                "img": "./book_mark_img/twitter.png"
+            },
+            {
+                "title": "instagram",
+                "url": "http://www.instagram.com/",
+                "img": "./book_mark_img/instagram.png"
+            }
+        ]
+    },{
+        "key":"apps",
+        "list":[
+            {
+                "title": "石墨",
+                "url": "https://shimo.im/",
+                "img": "./book_mark_img/shimo.png"
+            },{
+                "title": "语雀",
+                "url": "https://www.yuque.com/",
+                "img": "./book_mark_img/yuque.png"
+            },{
+                "title": "高德地图",
+                "url": "https://ditu.amap.com/",
+                "img": "./book_mark_img/gddt.png"
+            },{
+                "title": "印象笔记",
+                "url": "https://www.yinxiang.com/",
+                "img": "./book_mark_img/yinxiang.png"
+            },{
+                "title": "有道云笔记",
+                "url": "https://note.youdao.com/",
+                "img": "./book_mark_img/ydybj.png"
+            },{
+                "title": "谷歌翻译",
+                "url": "https://translate.google.cn/",
+                "img": "./book_mark_img/ggfy.png"
+            },{
+                "title": "稿定设计",
+                "url": "https://ps.gaoding.com/#/",
+                "img": "./book_mark_img/gaoding.png"
+            },{
+                "title": "Canva",
+                "url": "https://www.canva.cn/",
+                "img": "./book_mark_img/canva.png"
+            }
+        ]
+    },{
+        "key":"play",
+        "list":[
+            {
+                "title": "3DMGAME",
+                "url": "https://www.3dmgame.com/",
+                "img": "./book_mark_img/3dmgame.png"
+            },
+            {
+                "title": "游侠网",
+                "url": "https://game.ali213.net/",
+                "img": "./book_mark_img/yxw.png"
+            }
+        ]
+    },{
+        "key":"video",
+        "list":[
+            {
+                "title": "bilibili",
+                "url": "https://www.bilibili.com/",
+                "img": "./book_mark_img/bilibili.png"
+            },{
+                "title": "AcFun",
+                "url": "https://www.acfun.cn/",
+                "img": "./book_mark_img/acfun.png"
+            },{
+                "title": "西瓜视频",
+                "url": "https://www.ixigua.com/",
+                "img": "./book_mark_img/ixigua.png"
+            },{
+                "title": "抖音",
+                "url": "https://www.douyin.com/",
+                "img": "./book_mark_img/douyin.png"
+            },{
+                "title": "youtube",
+                "url": "https://www.youtube.com/",
+                "img": "./book_mark_img/youtube.png"
+            },{
+                "title": "腾讯视频",
+                "url": "https://v.qq.com/",
+                "img": "./book_mark_img/txsp.png"
+            },{
+                "title": "优酷",
+                "url": "https://www.youku.com/",
+                "img": "./book_mark_img/youku.png"
+            },{
+                "title": "爱奇艺",
+                "url": "http://www.iqiyi.com/",
+                "img": "./book_mark_img/iqiyi.png"
+            },{
+                "title": "芒果TV",
+                "url": "https://www.mgtv.com/",
+                "img": "./book_mark_img/mgtv.png"
+            },{
+                "title": "虎牙直播",
+                "url": "https://www.huya.com/",
+                "img": "./book_mark_img/huya.png"
+            },{
+                "title": "斗鱼直播",
+                "url": "https://www.douyu.com/",
+                "img": "./book_mark_img/douyu.png"
+            }
+        ]
+    },{
+        "key":"film",
+        "list":[
+            {
+                "title": "电影天堂",
+                "url": "https://www.dy2018.com/",
+                "img": "./book_mark_img/dytt.png"
+            },{
+                "title": "yyds电影",
+                "url": "https://yyds.fans/",
+                "img": "./book_mark_img/yyds.png"
+            },{
+                "title": "Grab4k",
+                "url": "https://www.grab4k.com/",
+                "img": "./book_mark_img/grab4k.png"
+            },{
+                "title": "音范丝",
+                "url": "https://www.yinfans.me/",
+                "img": "./book_mark_img/yinfans.png"
+            }
+        ]
+    },{
+        "key":"social",
+        "list":[{
+                "title": "twitter",
+                "url": "https://www.twitter.com/",
+                "img": "./book_mark_img/twitter.png"
+            },{
+                "title": "instagram",
+                "url": "http://www.instagram.com/",
+                "img": "./book_mark_img/instagram.png"
+            },{
+                "title": "百度贴吧",
+                "url": "https://tieba.baidu.com/",
+                "img": "./book_mark_img/tieba.png"
+            },{
+                "title": "豆瓣",
+                "url": "https://www.douban.com/",
+                "img": "./book_mark_img/douban.png"
+            },{
+                "title": "简书",
+                "url": "https://www.jianshu.com/",
+                "img": "./book_mark_img/jianshu.png"
+            }
+        ]
+    },{
+        "key":"news",
+        "list":[
+            {
+                "title": "知乎",
+                "url": "https://www.zhihu.com/",
+                "img": "./book_mark_img/zhihu.png"
+            }, {
+                "title": "IT之家",
+                "url": "https://www.ithome.com/",
+                "img": "./book_mark_img/ithome.png"
+            }, {
+                "title": "今日头条",
+                "url": "https://www.toutiao.com/",
+                "img": "./book_mark_img/toutiao.png"
+            }, {
+                "title": "少数派",
+                "url": "https://sspai.com/",
+                "img": "./book_mark_img/sspai.png"
+            }, {
+                "title": "网易新闻",
+                "url": "https://www.163.com/",
+                "img": "./book_mark_img/wyxw.png"
+            }, {
+                "title": "虎扑",
+                "url": "https://www.hupu.com/",
+                "img": "./book_mark_img/hupu.png"
+            }
+        ]
+    },{
+        "key":"shop",
+        "list":[
+            {
+                "title": "淘宝",
+                "url": "https://ai.taobao.com/",
+                "img": "./book_mark_img/taobao.png"
+            },{
+                "title": "京东",
+                "url": "https://www.jd.com/",
+                "img": "./book_mark_img/jd.png"
+            },{
+                "title": "天猫",
+                "url": "https://www.tmall.com/",
+                "img": "./book_mark_img/tmall.png"
+            },{
+                "title": "苏宁易购",
+                "url": "https://www.suning.com/",
+                "img": "./book_mark_img/suning.png"
+            },{
+                "title": "网易严选",
+                "url": "https://you.163.com/",
+                "img": "./book_mark_img/wyyx.png"
+            },{
+                "title": "什么值得买",
+                "url": "https://www.smzdm.com/",
+                "img": "./book_mark_img/smzdm.png"
+            },{
+                "title": "小米商城",
+                "url": "https://www.mi.com/",
+                "img": "./book_mark_img/xmsc.png"
+            },{
+                "title": "当当网",
+                "url": "https://www.dangdang.com/",
+                "img": "./book_mark_img/dangdang.png"
+            }
+        ]
+    },{
+        "key":"coder",
+        "list":[
+            {
+                "title": "Github",
+                "url": "https://github.com/",
+                "img": "./book_mark_img/github.png"
+            },{
+                "title": "码云",
+                "url": "https://gitee.com/",
+                "img": "./book_mark_img/gitee.png"
+            },{
+                "title": "CSDN",
+                "url": "https://www.csdn.net/",
+                "img": "./book_mark_img/csdn.png"
+            },{
+                "title": "菜鸟教程",
+                "url": "https://www.runoob.com/",
+                "img": "./book_mark_img/runoob.png"
+            },{
+                "title": "慕课网",
+                "url": "https://www.imooc.com/",
+                "img": "./book_mark_img/imooc.png"
+            },{
+                "title": "iconfont",
+                "url": "https://www.iconfont.cn/",
+                "img": "./book_mark_img/iconfont.png"
+            },{
+                "title": "carbon",
+                "url": "https://carbon.now.sh/",
+                "img": "./book_mark_img/carbon.png"
+            },{
+                "title": "开源中国",
+                "url": "https://www.oschina.net/",
+                "img": "./book_mark_img/oschina.png"
+            },{
+                "title": "Vue3",
+                "url": "https://v3.cn.vuejs.org/",
+                "img": "./book_mark_img/vue3.png"
+            },{
+                "title": "Vue2",
+                "url": "https://cn.vuejs.org/",
+                "img": "./book_mark_img/vue2.png"
+            }
+        ]
+    },{
+        "key":"designer",
+        "list":[
+            {
+                "title": "Figma",
+                "url": "https://www.figma.com",
+                "img": "./book_mark_img/figma.png"
+            },{
+                "title": "花瓣网",
+                "url": "https://huaban.com/",
+                "img": "./book_mark_img/huaban.png"
+            },{
+                "title": "pinterest",
+                "url": "https://www.pinterest.com/",
+                "img": "./book_mark_img/pinterest.png"
+            },{
+                "title": "中国色",
+                "url": "http://zhongguose.com/",
+                "img": "./book_mark_img/zhongguose.png"
+            },{
+                "title": "doyoudo",
+                "url": "https://doyoudo.com/",
+                "img": "./book_mark_img/doyoudo.png"
+            },{
+                "title": "站酷",
+                "url": "https://www.zcool.com.cn/",
+                "img": "./book_mark_img/zcool.png"
+            },{
+                "title": "dribbble",
+                "url": "http://www.dribbble.com/",
+                "img": "./book_mark_img/dribbble.png"
+            }
+        ]
+    },{
+        "key":"draw",
+        "list":[
+            {
+                "title": "ProcreateFolio",
+                "url": "https://folio.procreate.art/",
+                "img": "./book_mark_img/procreate.png"
+            },{
+                "title": "pixiv",
+                "url": "https://www.pixiv.net/",
+                "img": "./book_mark_img/pixiv.png"
+            },{
+                "title": "artstation",
+                "url": "https://www.artstation.com/",
+                "img": "./book_mark_img/artstation.png"
+            }
+        ]
+    }
+]
