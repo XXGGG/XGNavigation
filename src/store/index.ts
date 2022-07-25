@@ -4,7 +4,7 @@ import BookMarks from "../assets/BookMarks.json"
 export const mainStore = defineStore("main", {
   state: () => {
     return {
-      bg_img: "/bg_img/Cartoon_01.png",
+      bg_img: "./bg_img/Cartoon_01.png",
       Setup_Style: {
         layout_cols: 8,
         layout_rows: 4,

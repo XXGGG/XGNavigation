@@ -21,13 +21,13 @@
                 <n-tag> v0.0.1 </n-tag>
                 <n-space :size="20" class="aboutMe">
                     <a href="https://github.com/XXGGG" target="_blank">
-                        <n-avatar :size="60" src="/book_mark_img/github.png" />
+                        <n-avatar :size="60" src="./book_mark_img/github.png" />
                     </a>
                     <a href="https://space.bilibili.com/5276030" target="_blank">
-                        <n-avatar :size="60" src="/book_mark_img/bilibili.png" />
+                        <n-avatar :size="60" src="./book_mark_img/bilibili.png" />
                     </a>
                     <a href="https://www.weibo.com/u/2472496944" target="_blank">
-                        <n-avatar :size="60" src="/book_mark_img/weibo.png" />
+                        <n-avatar :size="60" src="./book_mark_img/weibo.png" />
                     </a>
                 </n-space>
             </n-space>
