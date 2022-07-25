@@ -76,7 +76,6 @@ let BookMarkList = computed(() => {
     for (let i = 0; i < pages.value; i++) {
         xxg.push(BookMarks.value.slice(num.value * i, num.value * (i + 1)))
     }
-    console.log(1)
     return xxg
 })
 

@@ -119,10 +119,10 @@ watch(() => Setup_Style.value.dark_time_end, () => { ChangeTheme() })
 
 //【监听背景图片变化】
 watch(() => store.bg_img, () => {
-  console.log(store.bg_img)
+  // console.log(store.bg_img)
   //图片加载成功
   let Myimg: any = document.getElementById('bg_img');
-  console.log(Myimg)
+  // console.log(Myimg)
   // let img_rgb: any = xgrgb(Myimg)
   // console.log(img_rgb)
 })
