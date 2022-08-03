@@ -1,0 +1,141 @@
+[
+  {
+    "key": "custom",
+    "list": []
+  },
+  {
+    "key": "ACG",
+    "list": [
+      {
+        "img": "./bg_img/ACG_01.png"
+      },
+      {
+        "img": "./bg_img/ACG_02.png"
+      },
+      {
+        "img": "./bg_img/ACG_03.png"
+      },
+      {
+        "img": "./bg_img/ACG_04.png"
+      },
+      {
+        "img": "./bg_img/ACG_05.png"
+      },
+      {
+        "img": "./bg_img/ACG_06.png"
+      },
+      {
+        "img": "./bg_img/ACG_07.png"
+      },
+      {
+        "img": "./bg_img/ACG_08.png"
+      },
+      {
+        "img": "./bg_img/ACG_09.png"
+      },
+      {
+        "img": "./bg_img/ACG_10.png"
+      },
+      {
+        "img": "./bg_img/ACG_11.png"
+      },
+      {
+        "img": "./bg_img/ACG_12.png"
+      },
+      {
+        "img": "./bg_img/ACG_13.png"
+      },
+      {
+        "img": "./bg_img/ACG_14.png"
+      },
+      {
+        "img": "./bg_img/ACG_15.png"
+      },
+      {
+        "img": "./bg_img/ACG_16.png"
+      },
+      {
+        "img": "./bg_img/ACG_17.png"
+      },
+      {
+        "img": "./bg_img/ACG_18.png"
+      },
+      {
+        "img": "./bg_img/ACG_19.png"
+      },
+      {
+        "img": "./bg_img/ACG_20.png"
+      },
+      {
+        "img": "./bg_img/ACG_21.png"
+      },
+      {
+        "img": "./bg_img/ACG_22.png"
+      },
+      {
+        "img": "./bg_img/ACG_23.png"
+      },
+      {
+        "img": "./bg_img/ACG_24.png"
+      },
+      {
+        "img": "./bg_img/ACG_26.png"
+      }
+      
+    ]
+  },
+  {
+    "key": "scenery",
+    "list": [
+      {
+        "img": "./bg_img/scenery_01.png"
+      },
+      {
+        "img": "./bg_img/scenery_02.png"
+      },
+      {
+        "img": "./bg_img/scenery_03.png"
+      },
+      {
+        "img": "./bg_img/scenery_04.png"
+      },
+      {
+        "img": "./bg_img/scenery_05.png"
+      }
+    ]
+  },
+  {
+    "key": "starry",
+    "list": [
+      {
+        "img": "./bg_img/starry_01.png"
+      },
+      {
+        "img": "./bg_img/starry_03.png"
+      },
+      {
+        "img": "./bg_img/starry_04.png"
+      },
+      {
+        "img": "./bg_img/starry_05.png"
+      }
+    ]
+  },
+  {
+    "key": "geometry",
+    "list": [
+      {
+        "img": "./bg_img/geometry_01.png"
+      },
+      {
+        "img": "./bg_img/geometry_02.png"
+      },
+      {
+        "img": "./bg_img/geometry_03.png"
+      },
+      {
+        "img": "./bg_img/geometry_04.png"
+      }
+    ]
+  }
+]

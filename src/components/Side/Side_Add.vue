@@ -16,7 +16,7 @@
           size="small">
           <template #header>
             <p class="list_item">
-              <img :src="item.img" @error="img_error($event)" />
+              <img :src="item.img" @error="img_error(this)" />
             <p>{{ item.title }}</p>
             </p>
           </template>
@@ -33,7 +33,7 @@
 
 <script setup lang='ts'>
 import { h, ref } from 'vue'
-import { Search, Award, AppWindow, Microphone2, Video, Armchair, Social, News, ShoppingCart, Brush, Code, Palette, Bookmark } from '@vicons/tabler'
+import { Award, Music, Video, Armchair, Social, News, ShoppingCart, Brush, Code, Palette, Tool, Notebook, Language, Map2, Mailbox, Cloud, DeviceGamepad, Book, Ruler, ColorSwatch } from '@vicons/tabler'
 import { NInput, NIcon, NSpace, NCard, NButton } from 'naive-ui'
 import { NLayout, NLayoutSider, NMenu } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
@@ -41,12 +41,12 @@ import AllBookMarks from '../../assets/AllBookMarks.json'
 import { mainStore } from '../../store/index'
 import { storeToRefs } from 'pinia';
 const store = mainStore() //引进Pinia仓库
-let { BookMarks } = storeToRefs(store)
+let { XGN_SET } = storeToRefs(store)
 
 function renderIcon(icon: any) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
-let Select_key = ref<string>('recommend')
+// let Select_key = ref<string>('recommend')
 const menuOptions: MenuOption[] = [
   {
     label: '推荐',
@@ -54,14 +54,44 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(Award)
   },
   {
-    label: '应用',
-    key: 'apps',
-    icon: renderIcon(AppWindow)
+    label: '工具',
+    key: 'tools',
+    icon: renderIcon(Tool)
   },
   {
-    label: '娱乐',
-    key: 'play',
-    icon: renderIcon(Microphone2)
+    label: '笔记',
+    key: 'note',
+    icon: renderIcon(Notebook)
+  },
+  {
+    label: '翻译',
+    key: 'translate',
+    icon: renderIcon(Language)
+  },
+  {
+    label: '地图',
+    key: 'map',
+    icon: renderIcon(Map2)
+  },
+  {
+    label: '邮箱',
+    key: 'mailbox',
+    icon: renderIcon(Mailbox)
+  },
+  {
+    label: '云盘',
+    key: 'Cloud',
+    icon: renderIcon(Cloud)
+  },
+  {
+    label: '游戏',
+    key: 'game',
+    icon: renderIcon(DeviceGamepad)
+  },
+  {
+    label: '音乐',
+    key: 'music',
+    icon: renderIcon(Music)
   },
   {
     label: '视频',
@@ -89,9 +119,19 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(ShoppingCart)
   },
   {
+    label: '学习',
+    key: 'study',
+    icon: renderIcon(Book)
+  },
+  {
     label: '程序员',
     key: 'coder',
     icon: renderIcon(Code)
+  },
+  {
+    label: 'UI库',
+    key: 'UIlibray',
+    icon: renderIcon(Ruler)
   },
   {
     label: '设计师',
@@ -103,12 +143,17 @@ const menuOptions: MenuOption[] = [
     key: 'draw',
     icon: renderIcon(Palette)
   },
+  {
+    label: '图画色彩',
+    key: 'picture',
+    icon: renderIcon(ColorSwatch)
+  },
 ]
 
 let BookMarksList: any = ref(AllBookMarks[0])
 //选择标签类型
 function selectTag(key: string, item: MenuOption) {
-  Select_key.value = key
+  // Select_key.value = key
   BookMarksList.value = AllBookMarks.find(function (obj) {
     return obj.key == key
   })
@@ -116,7 +161,7 @@ function selectTag(key: string, item: MenuOption) {
 
 //检查是否已有书签
 const check_exist = (title: string) => {
-  let xxg = BookMarks.value.some((item: any) => {
+  let xxg = XGN_SET.value.BookMarks.some((item: any) => {
     return item.title == title
   })
   return !xxg
@@ -124,21 +169,20 @@ const check_exist = (title: string) => {
 
 //【新增书签】
 const Add_Mark = (item: any) => {
-  BookMarks.value.push(item)
+  XGN_SET.value.BookMarks.push(item)
 }
 //【删除书签】
 const Del_Mark = (item: any) => {
-  let Key_Index = BookMarks.value.findIndex((i, index) => {
-      return item.title == i.title
+  let Key_Index = XGN_SET.value.BookMarks.findIndex((i: any) => {
+    return item.title == i.title
   })
-  BookMarks.value.splice(Key_Index,1)
+  XGN_SET.value.BookMarks.splice(Key_Index, 1)
 }
 
 //【图片出错处理】
-const img_error = (e: any) => {
-  let img = e.srcElement;
-  img.src = "./book_mark_img/default.png";
-  img.onerror = null;
+function img_error(_this: any) {
+  _this.src = "./book_mark_img/default.png";
+  _this.onerror = null;
 }
 </script>
 

@@ -1,13 +1,14 @@
 <template>
     <n-space vertical :size="20" style="margin:10px 0">
         <n-card title="壁纸" hoverable>
-            <div class="wallpaper_preview" :style="`background-image:url(${store.bg_img})`"
+            <div class="wallpaper_preview"
+                :style="`background-color:${store.XGN_SET.Bg_Color} ;background-image:url(${store.XGN_SET.Bg_Img})`"
                 @click="showChangeWallpaperModal">
                 <n-button size="large" color="#3939397a" class="show_change_wallpaer_modal" style="color:aliceblue">
                     更换壁纸 </n-button>
             </div>
             <n-modal v-model:show="ChangeWallpaperModal_state">
-                <n-card style="width: 700px;height: 700px; overflow: hidden;" :bordered="false" size="huge"
+                <n-card style="width: 900px;height: 700px; overflow: hidden;" :bordered="false" size="huge"
                     role="dialog">
                     <Side_Setup_Wallpaer />
                 </n-card>
@@ -23,23 +24,23 @@
                 <div>
                     <div class="setup_layout">
                         <div class="setup_layout_cols_slider">
-                            <n-slider v-model:value="store.Setup_Style.layout_cols" :marks="marks_cols" :step="1"
-                                :min="1" :max="8" />
+                            <n-slider v-model:value="store.XGN_SET.Layout_Cols" :marks="marks_cols" :step="1" :min="1"
+                                :max="8" />
                         </div>
                     </div>
                 </div>
                 <div>
                     <div class="setup_layout">
                         <div class="setup_layout_rows_slider">
-                            <n-slider v-model:value="store.Setup_Style.layout_rows" :marks="marks_rows" :step="1"
-                                :min="1" :max="4" vertical reverse />
+                            <n-slider v-model:value="store.XGN_SET.Layout_Rows" :marks="marks_rows" :step="1" :min="1"
+                                :max="4" vertical reverse />
                         </div>
                     </div>
                 </div>
                 <div class="layout_demo" :style="`
-                grid-template-columns: repeat(${Setup_Style.layout_cols},42px);
-                grid-template-rows: repeat(${Setup_Style.layout_rows},50px`">
-                    <div v-for="i in (Setup_Style.layout_rows * Setup_Style.layout_cols)">
+                grid-template-columns: repeat(${XGN_SET.Layout_Cols},42px);
+                grid-template-rows: repeat(${XGN_SET.Layout_Rows},50px`">
+                    <div v-for="i in (XGN_SET.Layout_Rows * XGN_SET.Layout_Cols)">
 
                     </div>
                 </div>
@@ -51,46 +52,50 @@
             <n-space vertical justify="space-around">
                 <n-space justify="space-between">
                     显示搜索栏
-                    <n-switch v-model:value="store.Setup_Style.Show_Search" />
+                    <n-switch v-model:value="store.XGN_SET.View_Search_Show" />
                 </n-space>
                 <n-space justify="space-between">
                     显示图标名称
-                    <n-switch v-model:value="store.Setup_Style.Show_Icon_Title" />
+                    <n-switch v-model:value="store.XGN_SET.View_BookMark_Title_Show" />
+                </n-space>
+                <n-space justify="space-between">
+                    显示书签
+                    <n-switch v-model:value="store.XGN_SET.View_BookMark_Show" />
                 </n-space>
             </n-space>
         </n-card>
         <n-card title="暗黑模式" hoverable>
             <n-space vertical>
                 <n-button-group size="large" style="width:100%">
-                    <n-button ghost :type="Setup_Style.dark_model == 'dark' ? 'primary' : undefined"
+                    <n-button ghost :type="XGN_SET.Dark_Mode == 'dark' ? 'primary' : undefined"
                         @click="ChangeTheme('dark')">
                         <template #icon>
                             <n-icon :component="MoonStars" />
                         </template>
                         暗
                     </n-button>
-                    <n-button ghost :type="Setup_Style.dark_model == 'light' ? 'primary' : undefined"
+                    <n-button ghost :type="XGN_SET.Dark_Mode == 'light' ? 'primary' : undefined"
                         @click="ChangeTheme('light')">
                         <template #icon>
                             <n-icon :component="Sun" />
                         </template>
                         光
                     </n-button>
-                    <n-button ghost :type="Setup_Style.dark_model == 'auto' ? 'primary' : undefined"
+                    <n-button ghost :type="XGN_SET.Dark_Mode == 'auto' ? 'primary' : undefined"
                         @click="ChangeTheme('auto')">
                         <template #icon>
                             <n-icon :component="DeviceAnalytics" />
                         </template>
                         跟随系统
                     </n-button>
-                    <n-button ghost :type="Setup_Style.dark_model == 'sky' ? 'primary' : undefined"
+                    <n-button ghost :type="XGN_SET.Dark_Mode == 'sky' ? 'primary' : undefined"
                         @click="ChangeTheme('sky')">
                         <template #icon>
                             <n-icon :component="Sunset" />
                         </template>
                         跟随早晚
                     </n-button>
-                    <n-button ghost :type="Setup_Style.dark_model == 'time' ? 'primary' : undefined"
+                    <n-button ghost :type="XGN_SET.Dark_Mode == 'time' ? 'primary' : undefined"
                         @click="ChangeTheme('time')">
                         <template #icon>
                             <n-icon :component="Clock" />
@@ -98,19 +103,20 @@
                         自定义
                     </n-button>
                 </n-button-group>
-                <n-collapse-transition :show="Setup_Style.dark_model == 'time'">
-                <n-card v-show="Setup_Style.dark_model == 'time'" title="自定义">
-                    <n-form ref="formRef" inline :label-width="40" label-placement="left" size="large" label-width="auto" class="flex">
-                        <n-form-item label="深色">
-                            <n-time-picker :seconds="[0]" :default-formatted-value="Setup_Style.dark_time_start"
-                                @confirm="select_dark_time_start" />
-                        </n-form-item>
-                        <n-form-item label="浅色">
-                            <n-time-picker :seconds="[0]" :default-formatted-value="Setup_Style.dark_time_end"
-                                @confirm="select_dark_time_end" />
-                        </n-form-item>
-                    </n-form>
-                </n-card>
+                <n-collapse-transition :show="XGN_SET.Dark_Mode == 'time'">
+                    <n-card v-show="XGN_SET.Dark_Mode == 'time'" title="自定义">
+                        <n-form ref="formRef" inline :label-width="40" label-placement="left" size="large"
+                            label-width="auto" class="flex">
+                            <n-form-item label="深色">
+                                <n-time-picker :seconds="[0]" :default-formatted-value="XGN_SET.Dark_Start_Time"
+                                    @confirm="select_dark_time_start" />
+                            </n-form-item>
+                            <n-form-item label="浅色">
+                                <n-time-picker :seconds="[0]" :default-formatted-value="XGN_SET.Dark_End_Time"
+                                    @confirm="select_dark_time_end" />
+                            </n-form-item>
+                        </n-form>
+                    </n-card>
                 </n-collapse-transition>
             </n-space>
 
@@ -122,7 +128,7 @@
 import { ref } from 'vue'
 import { Table } from '@vicons/tabler'
 import { MoonStars, Sun, DeviceAnalytics, Sunset, Clock } from '@vicons/tabler'
-import { NSpace, NCard, NButton, NButtonGroup, NIcon, NModal, NSwitch, NCollapseTransition} from 'naive-ui'
+import { NSpace, NCard, NButton, NButtonGroup, NIcon, NModal, NSwitch, NCollapseTransition } from 'naive-ui'
 import { NSlider } from 'naive-ui'
 import { NTimePicker } from 'naive-ui'
 import { NForm, NFormItem } from 'naive-ui'
@@ -131,7 +137,7 @@ import { storeToRefs } from 'pinia';
 import Side_Setup_Wallpaer from './Side_Setup/Side_Setup_Wallpaer.vue';
 //引进Pinia仓库
 const store = mainStore()
-let { Setup_Style } = storeToRefs(store)// 解构出来
+let { XGN_SET } = storeToRefs(store)// 解构出来
 
 
 //【壁纸】
@@ -166,15 +172,15 @@ let marks_cols = {
 //自定义暗黑时间
 //设置暗黑模式
 const ChangeTheme = (model: string) => {
-    store.ChangeTheme(model)
+    store.XGN_SET.Dark_Mode = model
 }
 const select_dark_time_start = (value: number) => {
     let date = new Date(value)
-    store.Setup_Style.dark_time_start = date.toLocaleTimeString()
+    store.XGN_SET.Dark_Start_Time = date.toLocaleTimeString()
 }
 const select_dark_time_end = (value: number) => {
     let date = new Date(value)
-    store.Setup_Style.dark_time_end = date.toLocaleTimeString()
+    store.XGN_SET.Dark_End_Time = date.toLocaleTimeString()
 }
 
 
@@ -196,7 +202,6 @@ const select_dark_time_end = (value: number) => {
 
     &:hover .show_change_wallpaer_modal {
         display: block;
-        // color: #3939397a;
     }
 
     .show_change_wallpaer_modal {

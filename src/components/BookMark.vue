@@ -1,16 +1,16 @@
 <template>
     <keep-alive>
-        <n-carousel :loop="false" :draggable="carousel_carousel_active" class="debut" @click="showDel_true()">
+        <n-carousel :loop="false" :draggable="carousel_carousel_active" class="debut" @click="showDel_false()">
             <n-carousel-item v-for="page in pages" :key="page" style="width:100%;">
-                <TransitionGroup ref="fuck" id="fuck" name="list" tag="div" v-show="BookMarkList[page - 1]"
+                <TransitionGroup ref="fuck" id="Mark" name="list" tag="div" v-show="BookMarkList[page - 1]"
                     class="bm_box" :style="`grid-gap: 0px;
-                    grid-template-columns: repeat(${Setup_Style.layout_cols}, calc(100% / ${Setup_Style.layout_cols}));
-                    grid-template-rows: repeat(${Setup_Style.layout_rows}, calc(100% / ${Setup_Style.layout_rows}));`">
+                    grid-template-columns: repeat(${XGN_SET.Layout_Cols}, calc(100% / ${XGN_SET.Layout_Cols}));
+                    grid-template-rows: repeat(${XGN_SET.Layout_Rows}, calc(100% / ${XGN_SET.Layout_Rows}));`">
 
                     <div v-for="(item, index) in BookMarkList[page - 1]" :key="item.url" class="bm_item">
                         <div :class="showDel ? 'vibration' : ''">
 
-                            <n-icon class="del" @click.stop="Del_Mark(index)" v-show="showDel">
+                            <n-icon class="del" @click.stop="Del_Mark(item.title)" v-show="showDel">
                                 <Minus />
                             </n-icon>
                             <div class="Del_mask" v-show="showDel" @click="showDel = false"></div>
@@ -19,11 +19,11 @@
                                 @dragstart.self="dragstart($event, index)" @drag.capture="drag($event)"
                                 @dragend.capture="dragend($event, index)" @dragenter="dragenter($event, index)"
                                 @drop="drop($event, index)" @contextmenu.prevent="rightClick">
-                                <book-mark-img v-show="item" :src="item.img"/>
+                                <book-mark-img v-show="item" :src="item.img" />
 
                                 <n-el class="bm_title">
                                     <transition name="icon">
-                                        <div v-if="Setup_Style.Show_Icon_Title">{{ item.title }}</div>
+                                        <div v-if="XGN_SET.View_BookMark_Title_Show">{{ item.title }}</div>
                                     </transition>
                                 </n-el>
                             </a>
@@ -44,37 +44,44 @@ import { mainStore } from '../store/index'
 import { storeToRefs } from 'pinia';
 import BookMarkImg from "./BookMarkImg.vue";
 const store = mainStore() //引进Pinia仓库
-let { Setup_Style, BookMarks } = storeToRefs(store)// 解构出来【设置样式】，【我的书签】
 
+let { XGN_SET } = storeToRefs(store)// 解构出来【设置样式】，【我的书签】
+
+//显示删除
 let showDel = ref(false)
-function Del_Mark(index: number) {
-    BookMarks.value.splice(index, 1);
+function Del_Mark(title:string) {
+    let Key_Index = XGN_SET.value.BookMarks.findIndex((item: any) => {
+        return item.title ==  title
+    })
+    XGN_SET.value.BookMarks.splice(Key_Index, 1);
 }
+//右键
 function rightClick() {
     showDel.value = !showDel.value;
 }
-function showDel_true() {
+//关闭显示的删除
+function showDel_false() {
     showDel.value = false;
 }
 
-// 一页展示的数量就是 横 乘 竖 
+// 一页展示的数量： 横 乘 竖 
 let num = computed(() => {
-    return Setup_Style.value.layout_cols * Setup_Style.value.layout_rows
+    return XGN_SET.value.Layout_Cols * XGN_SET.value.Layout_Rows
 })
 
-// 需要展示的页数 就用 全部书签数量 除 一页展示的数量
+// 需要展示的页数： 全部书签数量 除 一页展示的数量
 let pages: any = computed(() => {
     //向上取整
-    if (BookMarks.value.length == 0) {
+    if (XGN_SET.value.BookMarks.length == 0) {
         return 1
     }
-    return Math.ceil(BookMarks.value.length / num.value)
+    return Math.ceil(XGN_SET.value.BookMarks.length / num.value)
 })
 
 let BookMarkList = computed(() => {
     let xxg = [];
     for (let i = 0; i < pages.value; i++) {
-        xxg.push(BookMarks.value.slice(num.value * i, num.value * (i + 1)))
+        xxg.push(XGN_SET.value.BookMarks.slice(num.value * i, num.value * (i + 1)))
     }
     return xxg
 })
@@ -89,15 +96,15 @@ const change_carousel_false = () => {
     carousel_carousel_active.value = false
 }
 
-let xxg_event: any;
-let xxg_index: number;
+let mark_event: any;
+let mark_index: number;
 //1拖拽图标
 let dragstart = (event: any, index: any) => {
     event.dataTransfer.setData("index", index);
     // console.log(1)
-    xxg_event = event
-    xxg_event.target.style.opacity = '0.01'
-    xxg_index = index;
+    mark_event = event
+    mark_event.target.style.opacity = '0.01'
+    mark_index = index;
 };
 
 //2移动的过程
@@ -106,38 +113,39 @@ let drag = (event: any) => {
     // console.log(2)
 };
 
+let mark_move = false;
+
 //3松开鼠标的过程
 let dragend = (event: any, index: any) => {
     // console.log(3)
-    xxg_event.target.style.opacity = '1'
-    xxgmove = false
+    mark_event.target.style.opacity = '1'
+    mark_move = false
 };
 
-
-let xxgmove = false;
 //4 鼠标进入到
 let dragenter = (event: any, index: any) => {
     // console.log(4)
-    if (!xxgmove) {
+    if (!mark_move) {
         // event.preventDefault();
-        let startIndex = xxg_index;
+        let startIndex = mark_index;
         let currentIndex = parseInt(index);
         // console.log("start", startIndex);
         // console.log("drop", currentIndex);
 
         if (startIndex > currentIndex) {
-            xxgmove = true
-            BookMarks.value.splice(currentIndex, 0, BookMarks.value[startIndex]);
-            BookMarks.value.splice(startIndex + 1, 1);
+            mark_move = true
+            XGN_SET.value.BookMarks.splice(currentIndex, 0, XGN_SET.value.BookMarks[startIndex]);
+            XGN_SET.value.BookMarks.splice(startIndex + 1, 1);
 
         } else if (startIndex < currentIndex) {
-            xxgmove = true
-            BookMarks.value.splice(currentIndex + 1, 0, BookMarks.value[startIndex]);
-            BookMarks.value.splice(startIndex, 1);
+            mark_move = true
+            XGN_SET.value.BookMarks.splice(currentIndex + 1, 0, XGN_SET.value.BookMarks[startIndex]);
+            XGN_SET.value.BookMarks.splice(startIndex, 1);
         }
-        xxg_index = index
+
+        mark_index = index
         setTimeout(() => {
-            xxgmove = false
+            mark_move = false
         }, 300);
     }
 };
@@ -146,30 +154,30 @@ let dragenter = (event: any, index: any) => {
 let drop = (event: any, index: any) => {
     // console.log(5)
     event.preventDefault();
-    xxg_event.target.style.opacity = '1'
+    mark_event.target.style.opacity = '1'
     // let startIndex = parseInt(event.dataTransfer.getData("index"));
-    let startIndex = xxg_index;
+    let startIndex = mark_index;
     let currentIndex = parseInt(index);
 
     if (startIndex > currentIndex) {
-        BookMarks.value.splice(currentIndex, 0, BookMarks.value[startIndex]);
-        BookMarks.value.splice(startIndex + 1, 1);
+        XGN_SET.value.BookMarks.splice(currentIndex, 0, XGN_SET.value.BookMarks[startIndex]);
+        XGN_SET.value.BookMarks.splice(startIndex + 1, 1);
     } else if (startIndex < currentIndex) {
-        BookMarks.value.splice(
+        XGN_SET.value.BookMarks.splice(
             currentIndex + 1,
             0,
-            BookMarks.value[startIndex]
+            XGN_SET.value.BookMarks[startIndex]
         );
-        BookMarks.value.splice(startIndex, 1);
+        XGN_SET.value.BookMarks.splice(startIndex, 1);
     }
 };
 
 let fuck: any = ref<any>(null)
 // 监听轮播图宽度 改变 css变量
 onMounted(() => {
-    Wathcfuck()
-    function Wathcfuck() {
-        let xxfuck: any = document.getElementById('fuck')
+    watch_change()
+    function watch_change() {
+        let Mark: any = document.getElementById('Mark')
 
         const resizeObserver = new ResizeObserver((entries) => {
 
@@ -182,40 +190,37 @@ onMounted(() => {
             document.body.style.setProperty('--icon-box-height', IconBoxHeight + 'px')
 
 
-            document.body.style.setProperty('--icon-col', String(Setup_Style.value.layout_cols))
-            document.body.style.setProperty('--icon-row', String(Setup_Style.value.layout_rows))
+            document.body.style.setProperty('--icon-col', String(XGN_SET.value.Layout_Cols))
+            document.body.style.setProperty('--icon-row', String(XGN_SET.value.Layout_Rows))
 
 
             //根据宽算出来的边长
-            let IconWidth_width = (IconBoxWidth / Setup_Style.value.layout_cols)
-            let IconWidth_height = (IconBoxHeight / Setup_Style.value.layout_rows) - 20
+            let IconWidth_width = (IconBoxWidth / XGN_SET.value.Layout_Cols)
+            let IconWidth_height = (IconBoxHeight / XGN_SET.value.Layout_Rows) - 20
             if (IconWidth_width < IconWidth_height) {
                 if (IconWidth_width < 0) {
                     document.body.style.setProperty('--icon-width', '0px')
-                } else if (IconWidth_width > 180) {
-                    document.body.style.setProperty('--icon-width', '180px')
+                } else if (IconWidth_width > 160) {
+                    document.body.style.setProperty('--icon-width', '160px')
                 } else {
                     document.body.style.setProperty('--icon-width', IconWidth_width + 'px')
                 }
             } else {
                 if (IconWidth_height < 0) {
                     document.body.style.setProperty('--icon-width', '0px')
-                } else if (IconWidth_height > 180) {
-                    document.body.style.setProperty('--icon-width', '180px')
+                } else if (IconWidth_height > 160) {
+                    document.body.style.setProperty('--icon-width', '160px')
                 } else {
                     document.body.style.setProperty('--icon-width', IconWidth_height + 'px')
                 }
             }
         });
-        resizeObserver.observe(xxfuck)
+        resizeObserver.observe(Mark)
     }
-    watch(() => [Setup_Style.value.layout_cols, Setup_Style.value.layout_rows], () => {
-        Wathcfuck()
+    watch(() => [XGN_SET.value.Layout_Cols, XGN_SET.value.Layout_Rows], () => {
+        watch_change()
     })
 });
-
-
-
 
 </script>
 
@@ -243,8 +248,9 @@ onMounted(() => {
 
 .bm_box {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1500px;
     height: 90%;
+    min-height: 300px;
     margin: auto;
     display: grid;
     grid-gap: 100px;
@@ -264,11 +270,9 @@ onMounted(() => {
         display: flex;
         flex-direction: column;
         position: relative;
-        transition: translateY .5s ;
+        transition: translateY .5s;
     }
-    // .mark_img:hover{
-        
-    // }
+
     .del {
         position: absolute;
         top: calc(var(--icon-width) / -14);

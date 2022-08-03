@@ -1,27 +1,29 @@
 <template>
   <n-config-provider :theme="theme">
     <n-global-style />
-    <div class="bg_img" id="bg_img" :style="`background-image:url(${store.bg_img})`">
-
+    <div class="bg_img" id="bg_img"
+      :style="`background-color:${store.XGN_SET.Bg_Color} ; background-image:url(${store.XGN_SET.Bg_Img})`">
       <div class="app_box debut">
         <n-button class="Side_activate_btn" @click="activate()" color="#3939397a">
-          <n-icon :component="Hexagon" class="secret" />
+          <n-icon :component="Atom2" class="secret" />
         </n-button>
 
-        <!-- 搜索栏 -->
-        <Transition name="list">
-          <div class="Search_area debut" v-if="store.Setup_Style.Show_Search">
+        <TransitionGroup name="show">
+          <!-- 搜索栏 -->
+          <div class="Search_area debut" v-if="store.XGN_SET.View_Search_Show">
             <SearchBox />
           </div>
-        </Transition>
-        <div class="BookMark_area">
-          <BookMark />
-        </div>
+
+          <!-- 书签 -->
+          <div class="BookMark_area" v-if="store.XGN_SET.View_BookMark_Show">
+            <BookMark />
+          </div>
+        </TransitionGroup>
       </div>
 
     </div>
     <!-- 侧边栏 -->
-    <n-drawer v-model:show="Side_active" :width="600">
+    <n-drawer v-model:show="Side_active" style="width:100%; min-width:480px; max-width:600px">
       <n-drawer-content :native-scrollbar="false">
         <Side />
       </n-drawer-content>
@@ -31,7 +33,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { Hexagon } from '@vicons/tabler'
+import { Atom2 } from '@vicons/tabler'
 import { darkTheme, NConfigProvider, NGlobalStyle, NButton, NIcon } from 'naive-ui'
 import { NDrawer, NDrawerContent } from 'naive-ui'
 
@@ -40,16 +42,39 @@ import SearchBox from './components/SearchBox.vue'
 import BookMark from './components/BookMark.vue'
 import { mainStore } from './store/index'
 import { storeToRefs } from 'pinia';
+import localforage from "localforage";
 
 //引进Pinia仓库
 const store = mainStore()
-let { Setup_Style } = storeToRefs(store)// 解构出来
+let { XGN_SET } = storeToRefs(store)// 解构出来
+
+// 【初始化数据/监听数据】
+store.$subscribe((mutation, state) => {
+  //  mutation主要包含三个属性值：
+  //  events：当前state改变的具体数据，包括改变前的值和改变后的值等等数据
+  //  storeId：是当前store的id
+  //  type：用于记录这次数据变化是通过什么途径，主要有三个分别是
+  //         “direct” ：通过 action 变化的
+  //           ”patch object“ ：通过 $patch 传递对象的方式改变的
+  //           “patch function” ：通过 $patch 传递函数的方式改变的
+  // 
+  // console.log(mutation)
+  // console.log(state.XGN_SET)
+  localStorage.setItem("XGN_SET", JSON.stringify(state.XGN_SET))
+  localforage.setItem("XGN_SET", JSON.parse(JSON.stringify(state.XGN_SET)))
+}, { detached: false })  //第二个参数options对象，是各种配置参数
+//detached:布尔值，默认是 false，正常情况下，当订阅所在的组件被卸载时，订阅将被删除，
+// 如果设置detached值为 true 时，即使所在组件被卸载，订阅依然在生效
+
+//Pinia仓库初始化！
+store.init()
+
+
 // 侧边栏的激活状态
 const Side_active = ref(false)
 const activate = () => {
   Side_active.value = true
 }
-
 
 //【配置naive的暗黑主题】
 let theme: any = ref(darkTheme)
@@ -82,8 +107,8 @@ const TimeSetTheme = (model: string) => {
       theme.value = darkTheme
     }
   } else {
-    startDarkTime = Setup_Style.value.dark_time_start
-    endDarkTime = Setup_Style.value.dark_time_end
+    startDarkTime = XGN_SET.value.Dark_Start_Time
+    endDarkTime = XGN_SET.value.Dark_End_Time
     if (newTime < startDarkTime && newTime >= endDarkTime) {
       theme.value = null
     } else {
@@ -91,44 +116,36 @@ const TimeSetTheme = (model: string) => {
     }
   }
 }
-//改变主题颜色方法【光】【暗】【】
+//改变主题颜色方法【光】【暗】
 const ChangeTheme = () => {
-  clearInterval(TimeOut)
-  if (Setup_Style.value.dark_model == "light") {
+  clearInterval(TimeOut)//去掉之前的【计时】
+  if (XGN_SET.value.Dark_Mode == "light") {
     theme.value = null
-  } else if (Setup_Style.value.dark_model == 'dark') {
+  } else if (XGN_SET.value.Dark_Mode == 'dark') {
     theme.value = darkTheme
-  } else if (Setup_Style.value.dark_model == 'auto') {
+  } else if (XGN_SET.value.Dark_Mode == 'auto') {
     autoSetTheme()
   } else {
-    TimeSetTheme(Setup_Style.value.dark_model)
+    TimeSetTheme(XGN_SET.value.Dark_Mode)
     TimeOut = setInterval(() => {
-      TimeSetTheme(Setup_Style.value.dark_model)
-    }, 60000)
+      TimeSetTheme(XGN_SET.value.Dark_Mode)
+    }, 60000)//一分钟监听一次
   }
 }
 //【监听主题的变换】
-watch(() => Setup_Style.value.dark_model, () => {
+watch(() => XGN_SET.value.Dark_Mode, () => {
   ChangeTheme()
 }, {
   immediate: true //立即执行一次
 })
-watch(() => Setup_Style.value.dark_time_start, () => { ChangeTheme() })
-watch(() => Setup_Style.value.dark_time_end, () => { ChangeTheme() })
+watch(() => XGN_SET.value.Dark_Start_Time, () => { ChangeTheme() })
+watch(() => XGN_SET.value.Dark_End_Time, () => { ChangeTheme() })
 
 
-//【监听背景图片变化】
-watch(() => store.bg_img, () => {
-  // console.log(store.bg_img)
-  //图片加载成功
-  let Myimg: any = document.getElementById('bg_img');
-  // console.log(Myimg)
-  // let img_rgb: any = xgrgb(Myimg)
-  // console.log(img_rgb)
-})
 </script>
 
 <style lang="scss">
+// 【全局样式👇】
 body {
   --icon-box-width: 0;
   --icon-box-height: 0;
@@ -170,6 +187,7 @@ body {
 }
 </style>
 <style lang="scss" scoped>
+//背景
 .bg_img {
   position: absolute;
   left: 0;
@@ -184,6 +202,7 @@ body {
   transition: all .3s;
 }
 
+//应用区域
 .app_box {
   width: 100%;
   height: 100%;
@@ -194,6 +213,7 @@ body {
   // background-color: rgb(255, 85, 0);
 }
 
+//侧边栏按钮
 .Side_activate_btn {
   position: fixed;
   right: 40px;
@@ -208,63 +228,62 @@ body {
   transform: scale(2);
 }
 
+//搜索框
 .Search_area {
   width: 100%;
   height: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-color: rgba(0, 255, 255, 0.398);
   overflow: hidden;
   box-sizing: border-box;
+  // background-color: rgba(180, 89, 64, 0.5);
 }
 
+//书签
 .BookMark_area {
   width: 100%;
   height: 80%;
   display: flex;
   justify-content: start;
   align-items: flex-start;
-  // background-color: rgba(77, 137, 34, 0.399);
   overflow: hidden;
+  // background-color: rgba(64, 140, 180, 0.5);
 }
 
 
 
-
-.list-move {
-  transition: all 0.4s !important;
+// 动画
+.show-move {
+  transition: all .5s;
 }
 
-.list-enter-active {
+.show-enter-active {
   transition: all .2s;
 }
 
-.list-leave-active {
-  transition: all .4s;
+.show-leave-active {
+  transition: all .3s;
   position: absolute;
-  top: 0;
 }
 
-.list-enter-from {
+.show-enter-from {
   opacity: 0;
-  transform: scale(0.6);
+  transform: scale(0.8);
 }
 
-.list-enter-to {
+.show-enter-to {
   opacity: 1;
   transform: scale(1);
 }
 
-.list-leave-from {
+.show-leave-from {
   opacity: 1;
-  // transform: scale(1);
+  transform: scale(0.8);
 }
 
-.list-leave-to {
+.show-leave-to {
   opacity: 0;
-  // transform: scale(0.6);
-  transform: translateY(-100px);
-
+  transform: scale(0.6);
 }
 </style>

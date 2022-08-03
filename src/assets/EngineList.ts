@@ -37,7 +37,7 @@ export const EngineList:any = [
   {
     label: "必应",
     key: "https://cn.bing.com/search?q=",
-    img: "search_enging_img/bing.png",
+    img: "search_enging_img/bing.svg",
     placeholder: "必应搜索",
     name: "by",
   },
@@ -58,8 +58,15 @@ export const EngineList:any = [
   {
     label: "豆瓣",
     key: "https://www.douban.com/search?q=",
-    placeholder: "提供图书、电影、音乐唱片的推荐 ",
+    placeholder: "提供图书、电影、音乐唱片的推荐",
     img: "search_enging_img/douban.svg",
     name: "db",
+  },
+  {
+    label: "Github",
+    key: "https://github.com/search?q=",
+    placeholder: "Search or jump to...",
+    img: "search_enging_img/github.svg",
+    name: "gh",
   },
 ];

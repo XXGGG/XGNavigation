@@ -2,7 +2,7 @@
     <n-space vertical :size="20" style="margin:10px 0">
         <n-card size="large" hoverable>
             <n-space class="flex">
-                <n-avatar :size="60" round src="" style="margin-right:20px" />
+                <n-avatar :size="60" round src="./XGN.png" style="margin-right:20px" />
                 <n-space vertical>
                     <n-gradient-text type="info" class="h1">
                         注册/登录
@@ -15,6 +15,7 @@
         </n-card>
 
         <n-card title="备份与恢复" hoverable>
+            暂时不支持登录/注册 - 数据同步
         </n-card>
         <n-card title="关于" hoverable>
             <n-space vertical :size="20">
@@ -29,6 +30,9 @@
                     <a href="https://www.weibo.com/u/2472496944" target="_blank">
                         <n-avatar :size="60" src="./book_mark_img/weibo.png" />
                     </a>
+                    <a href="https://xxggg.github.io/Project/XGNavigation.html" target="_blank">
+                        <n-avatar :size="60" src="./XGN.png" />
+                    </a>
                 </n-space>
             </n-space>
         </n-card>
@@ -36,7 +40,6 @@
 </template>
 
 <script setup lang='ts'>
-import { } from 'vue'
 import { NCard, NAvatar, NSpace, NGradientText, NTag } from 'naive-ui'
 </script>
 
@@ -48,11 +51,15 @@ import { NCard, NAvatar, NSpace, NGradientText, NTag } from 'naive-ui'
 
 .aboutMe {
     a { 
+        display: block;
+        width: 60px;
+        height: 60px;
         transition:opacity .2s;
+        border-radius: 14px;
+        overflow: hidden;
         &:hover {
             opacity: 0.6;
         }
-
     }
 }
 </style>

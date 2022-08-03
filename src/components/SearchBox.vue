@@ -4,9 +4,9 @@
             <img :src="SearchEngine.img">
         </div>
         <input type="text" :placeholder="SearchEngine.placeholder" v-model="SearchContent" @keydown.enter="Search">
-        <n-modal v-model:show="SwitchModal_active">
+        <n-modal v-model:show="SwitchModal_active" transform-origin="center">
             <n-card
-                style="width: 90%; max-width: 800px;min-width:300px; position: absolute; right: 0px; left: 0px; top: 12.8%;padding: 0 !important;"
+                style="width: 90%; max-width: 800px;min-width:300px;"
                 :bordered="false" size="small" role="dialog" aria-modal="true">
                 <n-grid x-gap="6" y-gap="6" :cols="6">
                     <n-gi v-for="item in EngineList" :key="item.name" class="Enging_item" @click="Switch_Engine(item)">
@@ -17,7 +17,6 @@
             </n-card>
         </n-modal>
     </n-el>
-
 </template>
 
 <script setup lang='ts'>
@@ -26,9 +25,13 @@ import { NEl } from 'naive-ui'
 import { NModal, NCard } from 'naive-ui'
 import { NGrid, NGi } from 'naive-ui'
 import { EngineList } from '../assets/EngineList' //搜索引擎列表
+import { mainStore } from '../store/index'
+import { storeToRefs } from 'pinia';
+const store = mainStore() //引进Pinia仓库
+let { XGN_SET } = storeToRefs(store)// 解构出来【设置样式
 
 //搜索引擎的默认设置
-let SearchEngine: any = ref(EngineList[0])
+let SearchEngine: any = ref(XGN_SET.value.Search_Engine)
 //搜索引擎的切换窗口的状态
 let SwitchModal_active = ref(false)
 //搜索引擎切换窗口的打开按钮
@@ -37,8 +40,8 @@ const SwitchModal_button = () => {
 }
 //切换搜索引擎
 const Switch_Engine = (item: object) => {
-    // console.log(item)
     SearchEngine.value = item
+    XGN_SET.value.Search_Engine = item
     SwitchModal_active.value = false
 }
 //搜索！
@@ -51,7 +54,6 @@ const Search = () => {
 // 搜索框大小
 let scale = ref('1')
 
-//搜索框圆角
 </script>
 
 <style lang='scss' scoped>
@@ -98,7 +100,6 @@ input:hover {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-
     img {
         height: 50%;
     }
@@ -110,13 +111,11 @@ input:hover {
     justify-content: space-evenly;
     align-items: center;
     overflow: hidden;
-    border: 2px solid rgba(62, 62, 62, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     aspect-ratio: 1 / 1;
     cursor: pointer;
     transition: all 0.5s;
-    background: linear-gradient(324.11deg, #212426 1.35%, #1f1f1f 56.42%, #212121 96.38%);
-    // box-shadow: 73.5524px 65.6008px 137.165px rgba(38, 92, 171, 0.25), inset 0px -15px 24px rgba(231, 236, 237, 0.29), inset 0px -30.1656px 41.3699px #1A2024, inset 0px 22.4087px 41.3699px rgba(255, 255, 255, 0.35);
 
     &:hover {
         border: 2px solid rgb(110, 169, 205);
