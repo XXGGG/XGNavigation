@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "XGNavigation",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"description": "新标签页",
 	"icons": {
 		"16": "XGN.png",
@@ -10,7 +10,6 @@
 	},
 	"homepage_url": "https://github.com/XXGGG",
 	"chrome_url_overrides": {
-		"newtab": "index.html",
-		"title": "新标签页"
+		"newtab": "index.html"
 	}
 }

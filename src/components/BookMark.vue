@@ -2,7 +2,7 @@
     <keep-alive>
         <n-carousel :loop="false" :draggable="carousel_carousel_active" class="debut" @click="showDel_false()">
             <n-carousel-item v-for="page in pages" :key="page" style="width:100%;">
-                <TransitionGroup ref="fuck" id="Mark" name="list" tag="div" v-show="BookMarkList[page - 1]"
+                <TransitionGroup id="Mark" name="list" tag="div" v-show="BookMarkList[page - 1]"
                     class="bm_box" :style="`grid-gap: 0px;
                     grid-template-columns: repeat(${XGN_SET.Layout_Cols}, calc(100% / ${XGN_SET.Layout_Cols}));
                     grid-template-rows: repeat(${XGN_SET.Layout_Rows}, calc(100% / ${XGN_SET.Layout_Rows}));`">
@@ -172,10 +172,11 @@ let drop = (event: any, index: any) => {
     }
 };
 
-let fuck: any = ref<any>(null)
 // 监听轮播图宽度 改变 css变量
 onMounted(() => {
     watch_change()
+
+
     function watch_change() {
         let Mark: any = document.getElementById('Mark')
 
@@ -214,7 +215,7 @@ onMounted(() => {
                     document.body.style.setProperty('--icon-width', IconWidth_height + 'px')
                 }
             }
-        });
+        })
         resizeObserver.observe(Mark)
     }
     watch(() => [XGN_SET.value.Layout_Cols, XGN_SET.value.Layout_Rows], () => {
